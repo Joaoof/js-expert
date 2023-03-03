@@ -5,7 +5,7 @@ export default class Controller {
   constructor({view, service, worker}) {
     this.#view = view
     this.#service = service
-    this.#worker = worker
+    this.#worker = this.#configureWorker(worker)
 
     this.#view.configureOnBtnClick(this.onBtnStart.bind(this))
   }
@@ -17,7 +17,7 @@ export default class Controller {
   }
   #configureWorker(worker) {
     worker.onmessage = (msg) => {
-      console.log('recebi')
+      console.log('recebi', msg)
     }
 
     return worker
