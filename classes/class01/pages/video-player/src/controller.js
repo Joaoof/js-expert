@@ -1,6 +1,9 @@
 export default class Controller {
-  constructor({}) {
-
+  #view
+  #service  
+  constructor({view, service}) {
+    this.#view = view
+    this.#service = service
   }
 
   static async initialize(deps) {
