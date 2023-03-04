@@ -2,6 +2,7 @@ export default class Controller {
   #view
   #service  
   #worker
+  #blinkCounter = 0
   constructor({view, service, worker}) {
     this.#view = view
     this.#service = service
@@ -16,11 +17,18 @@ export default class Controller {
     return controller.init()
   }
   #configureWorker(worker) {
-    worker.onmessage = (msg) => {
-      if('READY' === msg.data) {
+    worker.onmessage = ({ data }) => {
+      if('READY' === data) {
+        console.log('worker is ready')
+        let ready = false
         this.#view.enableButton()
+        ready = true
         return
       }
+
+      const blinked = data.blinked
+      this.#blinkCounter += blinked
+      console.log('blinked', blinked)
     }
 
     return worker
@@ -34,5 +42,6 @@ export default class Controller {
   }  
   onBtnStart() {
     this.log('Initializing detection...')
+    this.#blinkCounter = 0
   }
 }
