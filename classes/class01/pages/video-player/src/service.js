@@ -13,6 +13,11 @@ export default class Service {
 
     }
 
+    async handBlinked(video) {
+      const predictions = await this.estimateFaces(video)
+      console.log({ predictions })
+    }
+
     #estimateFaces(video) {
       return this.#model.estimateFaces({
         input: video,
