@@ -6,7 +6,7 @@ export default class View {
 
   getVideoFrame(video) {
     const canvas = this.#videoFrameCanvas
-    const [ width, height] = [video.videoWith, video.videoHeight]
+    const [ width, height] = [video.videoWidth, video.videoHeight]
     canvas.width = width
     canvas.height = height
 

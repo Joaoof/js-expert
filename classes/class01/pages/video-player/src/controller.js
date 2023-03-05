@@ -17,10 +17,10 @@ export default class Controller {
     return controller.init()
   }
   #configureWorker(worker) {
+    let ready = false
     worker.onmessage = ({ data }) => {
       if('READY' === data) {
         console.log('worker is ready')
-        let ready = false
         this.#view.enableButton()
         ready = true
         return
